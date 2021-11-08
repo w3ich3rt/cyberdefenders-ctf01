@@ -211,12 +211,12 @@ The logentrys you are looking for is `Accepted password`.
 
 You could count them via wc -l with something like:
 ```shell
-grep "Accepted password" var/log/secure | awk '{print $9,"    ",$11 }' | uniq | grep 192.168.196.128 | wc -l
+grep "Accepted password" var/log/secure | awk '{print $9,"    ",$11 }' | uniq | grep 192.168.196.128 
 # the awk will look for the attacker ip and the username
 # the uniq will... unique the output :D 
-# and then we can count them
 ```
-> Side-note: I always think of one more victim as the right answer for the task :-D
+But this result is not the answer! You have to check the failed logins from this useraccounts as well.
+Check if the user were bruteforced or if some of them are logged in over another way ;-)
 
 ### 10 - When did the attack start? (DD/MM/YYYY)
 Look at the secure log for this as well! Its end of august. The snipped from task 5 will not help you.
