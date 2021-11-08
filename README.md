@@ -196,16 +196,33 @@ Aug 24 08:24:20 localhost sshd[2979]: pam_unix(sshd:session): session opened for
 In this lines you will get the flag :-)
 
 ### 6 - What service did the attacker use to gain access to the system?
+This one should be quite easy, because we analyzed the logs a task ago ;-)
 
 ### 7 - What is the attacker's IP address?
+Look at the same logfile as for task five. This IP has a massive amount of connections to the system.
 
 ### 8 - What authentication attack did the attacker use to gain access o the system?
+Again, look at the same logs. You'll see a massive amount on login attempts and wrong password failures.
+What kind of attack could that be? :D 
 
 ### 9 - How many users the attacker was able to bruteforce their password?
+Same log again, count the successfull login attempts after the first attack.
+The logentrys you are looking for is `Accepted password`.
+
+You could count them via wc -l with something like:
+```shell
+grep "Accepted password" var/log/secure | awk '{print $9,"    ",$11 }' | uniq | grep 192.168.196.128 | wc -l
+# the awk will look for the attacker ip and the username
+# the uniq will... unique the output :D 
+# and then we can count them
+```
+> Side-note: I always think of one more victim as the right answer for the task :-D
 
 ### 10 - When did the attack start? (DD/MM/YYYY)
+Look at the secure log for this as well! Its end of august. The snipped from task 5 will not help you.
 
 ### 11 - What is the user used by the attacker to gain initial access to system?
+To answer this question, you can also use the secure logfile and look for the first succsessful log
 
 ### 12 - What is the MITRE ID of the technique used by the attacker to achieve persistence?
 
